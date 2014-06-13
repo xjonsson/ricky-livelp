@@ -14,11 +14,18 @@ board.on("ready", function(){
     pins: [11,12]
   });
 
-  //Make 10 full revolutions counter-clockwise at 18rpm with acceleration and deceleration
-  stepper.rpm(360).ccw().accel(1600).decel(1600).step(2000, function() {
-    //console.log("Done moving CCW");
+  // Make 10 full revolutions counter-clockwise at 180 rpm with acceleration and deceleration
+  stepper.rpm(180).ccw().accel(1600).decel(1600).step(2000, function() {
+
+    console.log("Done moving CCW");
 
     // once first movement is done, make 10 revolutions clockwise at previously
     //      defined speed, accel, and decel by passing an object into stepper.step
+    stepper.step({
+      steps: 2000,
+      direction: five.Stepper.DIRECTION.CW
+    }, function() {
+      console.log("Done moving CW");
+    });
   });
 });
